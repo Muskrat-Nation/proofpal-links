@@ -9,15 +9,15 @@
     <meta property="og:title" content="ProofPal Recipe">
     <meta property="og:description" content="Tap to open this sourdough recipe in ProofPal">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://proofpal.me/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="https://proofpal.me/sourdough_icon_no_alpha.png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1024">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ProofPal Recipe">
     <meta name="twitter:description" content="Tap to open this sourdough recipe in ProofPal">
-    <meta name="twitter:image" content="https://proofpal.me/og-image.png">
+    <meta name="twitter:image" content="https://proofpal.me/sourdough_icon_no_alpha.png">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,8 +45,13 @@
         }
         
         .icon {
-            font-size: 64px;
             margin-bottom: 16px;
+        }
+        
+        .icon img {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
         }
         
         .recipe-name {
@@ -120,7 +125,7 @@
 </head>
 <body>
     <div class="card">
-        <div class="icon">🍞</div>
+        <div class="icon"><img src="/sourdough_icon_no_alpha.png" alt="ProofPal"></div>
         <div class="recipe-name" id="recipeName">ProofPal Recipe</div>
         <div class="subtitle">Shared from ProofPal</div>
         
