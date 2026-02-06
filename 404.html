@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProofPal</title>
+    <meta property="og:title" content="ProofPal Recipe">
+    <meta property="og:description" content="Tap to open this sourdough recipe in ProofPal">
+    <meta property="og:image" content="https://cmarkson.github.io/proofpal-links/og-image.png">
+    <script>
+        // GitHub Pages 404 router: redirect to /r/ with query params preserved
+        var path = window.location.pathname;
+        var search = window.location.search;
+        if (path.startsWith('/proofpal-links/r/')) {
+            // Already at the right path, redirect to index
+            window.location.replace('/proofpal-links/r/' + search);
+        } else {
+            window.location.replace('/proofpal-links/' + search);
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>

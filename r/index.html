@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProofPal Recipe</title>
+    
+    <!-- Open Graph / Messages link preview -->
+    <meta property="og:title" content="ProofPal Recipe">
+    <meta property="og:description" content="Tap to open this sourdough recipe in ProofPal">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cmarkson.github.io/proofpal-links/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ProofPal Recipe">
+    <meta name="twitter:description" content="Tap to open this sourdough recipe in ProofPal">
+    <meta name="twitter:image" content="https://cmarkson.github.io/proofpal-links/og-image.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #fdf6e8 0%, #f5ebe0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #3d2e1a;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        
+        .icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        
+        .recipe-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #8b7355;
+            margin-bottom: 24px;
+        }
+        
+        .status {
+            font-size: 15px;
+            color: #6b5b45;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d4b896;
+            border-top-color: #8b6914;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .open-btn {
+            display: inline-block;
+            background: #8b6914;
+            color: white;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            transition: background 0.2s;
+            margin-bottom: 12px;
+        }
+        
+        .open-btn:hover { background: #6d5410; }
+        
+        .secondary-btn {
+            display: inline-block;
+            color: #8b6914;
+            text-decoration: none;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .hidden { display: none; }
+        
+        .footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: #b8a88a;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">🍞</div>
+        <div class="recipe-name" id="recipeName">ProofPal Recipe</div>
+        <div class="subtitle">Shared from ProofPal</div>
+        
+        <!-- State 1: Opening... -->
+        <div id="openingState" class="status">
+            <span class="spinner"></span> Opening in ProofPal...
+        </div>
+        
+        <!-- State 2: Fallback (app not installed) -->
+        <div id="fallbackState" class="hidden">
+            <p class="status">Import this recipe into ProofPal to view the full details, adjust ingredients, and start baking.</p>
+            <a id="openBtn" class="open-btn" href="#">Open in ProofPal</a>
+            <br>
+            <a class="secondary-btn" href="https://apps.apple.com/app/proofpal/id0000000000">
+                Get ProofPal on the App Store
+            </a>
+        </div>
+        
+        <div class="footer">ProofPal — Your Sourdough Companion</div>
+    </div>
+    
+    <script>
+        // Parse URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const recipeId = params.get('id');
+        const recipeName = params.get('name');
+        
+        // Update recipe name if provided
+        if (recipeName) {
+            document.getElementById('recipeName').textContent = recipeName;
+            document.title = recipeName + ' — ProofPal Recipe';
+        }
+        
+        // Build the deep link
+        const deepLink = recipeId 
+            ? 'proofpal://import/' + encodeURIComponent(recipeId)
+            : 'proofpal://';
+        
+        // Set the manual open button href
+        document.getElementById('openBtn').href = deepLink;
+        
+        // Try to open the app immediately
+        if (recipeId) {
+            // Attempt app redirect
+            window.location.href = deepLink;
+            
+            // After a delay, show the fallback UI
+            // (if the app opened, user won't see this)
+            setTimeout(function() {
+                document.getElementById('openingState').classList.add('hidden');
+                document.getElementById('fallbackState').classList.remove('hidden');
+            }, 2500);
+        } else {
+            // No recipe ID — show fallback immediately
+            document.getElementById('openingState').classList.add('hidden');
+            document.getElementById('fallbackState').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
