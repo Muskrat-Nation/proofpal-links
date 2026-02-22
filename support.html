@@ -123,10 +123,10 @@
       border-radius: 16px;
       border: 1px solid var(--line);
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
-      aspect-ratio: 1290 / 2796;
-      max-height: 280px;
+      height: clamp(170px, 24vw, 280px);
       object-fit: cover;
-      object-position: top center;
+      object-position: center;
+      background: #f79a12;
     }
 
     main {
@@ -277,6 +277,10 @@
         align-items: flex-start;
       }
 
+      .hero-shot {
+        height: clamp(150px, 48vw, 200px);
+      }
+
       main {
         padding: 14px;
         gap: 14px;
@@ -316,8 +320,8 @@
       </div>
       <img
         class="hero-shot"
-        src="ProofPal/ProofPal_iPhone_Banner_blended_noborder.png"
-        alt="ProofPal app preview"
+        src="ProofPal/ProofPal_support_banner_wide.png"
+        alt="ProofPal banner"
       />
     </header>
 
